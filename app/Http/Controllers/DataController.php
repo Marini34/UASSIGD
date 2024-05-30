@@ -9,9 +9,9 @@ class DataController extends Controller
 {
     public function places()
     {
-        $places = Place::orderBy('place_name', 'ASC');
+        $places = Place::latest()->get();
         return datatables()->of($places)
-            ->addColumn('action', 'places.buttons')
+            ->addColumn('action', 'places.button')
             ->addIndexColumn()
             ->rawColumns(['action'])
             ->toJson();

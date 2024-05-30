@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Place;
 // use App\Http\Resources\Place;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class PlaceController extends Controller
 {
@@ -29,21 +30,34 @@ class PlaceController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'place_name' => 'required|min:3',
+            'name' => 'required|min:3',
             'address'   => 'required|min:10',
             'description' => 'required|min:10',
             'longitude'  => 'required',
             'latitude'  => 'required'
         ]);
-        Place::create([
-            'place_name' => $request->place_name,
-            'address'  => $request->address,
-            'description' => $request->description,
-            'longitude' => $request->longitude,
-            'latitude' => $request->latitude,
-        ]);
-        notify()->success('Place has been created');
-        return redirect()->route('places.index');
+
+        $place = new Place;
+        if ($request->hasFile('image')){
+            $file = $request->file('image');
+            $uploadFile = $file->hashName();
+            $file->move('upload/place/', $uploadFile);
+            $place->image = $uploadFile;
+        }
+
+        $place->name = $request->input('name');
+        $place->address = $request->input('address');
+        $place->description = $request->input('description');
+        $place->latitude = $request->input('latitude');
+        $place->longitude = $request->input('longitude');
+        $place->save();
+        if ($place) {
+            notify()->success('Place has been created');
+            return redirect()->route('places.index');
+        } else {
+            notify()->error('Place not been created');
+            return redirect()->route('places.create');
+        }
     }
 
 
@@ -66,19 +80,37 @@ class PlaceController extends Controller
     public function update(Request $request, Place $place)
     {
         $this->validate($request, [
-            'place_name' => 'required|min:3',
+            'name' => 'required|min:3',
             'address'   => 'required|min:10',
             'description' => 'required|min:10',
             'longitude'  => 'required',
             'latitude'  => 'required'
         ]);
 
+        if ($request->hasFile('image')) {
+            /**
+             * Hapus file image pada folder public/upload/spots
+             */
+            if (File::exists('upload/place/' . $place->image)) {
+                File::delete('upload/place/' . $place->image);
+            }
+
+            $file = $request->file('image');
+            $uploadFile = $file->hashName();
+            $file->move('upload/place/', $uploadFile);
+            $place->image = $uploadFile;
+
+            $place->update([
+            'image' => $request->image,
+            ]);
+        }
+
         $place->update([
-            'place_name' => $request->place_name,
+            'name' => $request->name,
             'address'  => $request->address,
             'description' => $request->description,
-            'longitude' => $request->longitude,
             'latitude' => $request->latitude,
+            'longitude' => $request->longitude
         ]);
 
         notify()->info('Place has been updated');

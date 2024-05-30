@@ -24,8 +24,8 @@
                             <div class="form-row mb-2 d-md-flex gap-2 justify-content-center">
                                 <div class="col-md-6">
                                     <label for="">Place Name</label>
-                                    <input type="text" name="place_name" class="form-control @error ('place_name') is-invalid @enderror" placeholder="Place name here...">
-                                    @error('place_name')
+                                    <input type="text" name="name" class="form-control @error ('name') is-invalid @enderror" placeholder="Place name here...">
+                                    @error('name')
                                         <span class="invalid-feedback">
                                             <strong>{{ $message }}</strong>
                                         </span>

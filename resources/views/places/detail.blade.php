@@ -8,7 +8,7 @@
                 <div class="card-body">
                     <table class="table">
                         <tbody>
-                            <tr><td>Nama Tempat</td><td>{{ $place->place_name }}</td></tr>
+                            <tr><td>Nama Tempat</td><td>{{ $place->name }}</td></tr>
                             <tr><td>Alamat</td><td>{{ $place->address }}</td></tr>
                             <tr><td>Alamat</td><td>{{ $place->description }}</td></tr>
                         </tbody>
@@ -62,7 +62,7 @@ axios.get('{{ route('api.places.index') }}')
         }
     })
     .bindPopup(function(layer) {
-        return ('<div class="my-2"><strong>Place Name</strong> :<br>'+layer.feature.properties.place_name+'</div> <div class="my-2"><strong>Description</strong>:<br>'+layer.feature.properties.description+'</div><div class="my-2"><strong>Address</strong>:<br>'+layer.feature.properties.address+'</div>');
+        return ('<div class="my-2"><strong>Place Name</strong> :<br>'+layer.feature.properties.name+'</div> <div class="my-2"><strong>Description</strong>:<br>'+layer.feature.properties.description+'</div><div class="my-2"><strong>Address</strong>:<br>'+layer.feature.properties.address+'</div>');
     }).addTo(map);
     console.log(response.data);
    })

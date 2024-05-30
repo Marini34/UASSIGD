@@ -9,17 +9,20 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    @notifyCss
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
 
     <!-- Scripts -->
     
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
+
     <!-- Styles -->
     @yield('styles')
-    @notifyCss
 </head>
 <body>
     <div id="app">
@@ -84,9 +87,13 @@
         </main>
     </div>
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
-    @stack('scripts')
     @notifyJs
     <script src="{{ mix('js/app.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/fontawesome.min.js"></script>
+    
+    
+    @stack('scripts')
+
 
 </body>
 </html>

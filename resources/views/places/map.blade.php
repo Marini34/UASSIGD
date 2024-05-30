@@ -54,7 +54,7 @@ var tile = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     }).addTo(map);
 
 // ikuti modul
-    axios.get("{{ route('api.places.index') }}")
+    axios.get("{{ route('places.api') }}")
     .then(function (response) {
         //console.log(response.data);
         L.geoJSON(response.data,{
@@ -64,7 +64,7 @@ var tile = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         })
         .bindPopup(function(layer) {
             //return layer.feature.properties.map_popup_content;
-            return ('<div class="my-2"><strong>Place Name</strong> :<br>'+layer.feature.properties.place_name+'</div> <div class="my-2"><strong>Description</strong>:<br>'+layer.feature.properties.description+'</div><div class="my-2"><strong>Address</strong>:<br>'+layer.feature.properties.address+'</div>');
+            return ('<div class="my-2"><strong>Place Name</strong> :<br>'+layer.feature.properties.name+'</div> <div class="my-2"><strong>Description</strong>:<br>'+layer.feature.properties.description+'</div><div class="my-2"><strong>Address</strong>:<br>'+layer.feature.properties.address+'</div>');
         }).addTo(map);
         console.log(response.data);
     }).catch(function (error) {
@@ -75,7 +75,7 @@ var tile = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             <?php
             foreach ($places as $key => $value) {
             ?>
-                {"loc":[<?= $value->latitude ?>,<?= $value->longitude ?>], "title": "<?= $value->place_name ?>"},
+                {"loc":[<?= $value->latitude ?>,<?= $value->longitude ?>], "title": "<?= $value->name ?>"},
             <?php } ?>
         ];
 
