@@ -42,17 +42,14 @@ D
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 <script>
+    var center = [{{ config('leafletsetup.map_center_latitude') }}, {{ config('leafletsetup.map_center_longitude') }}]
  // Initialize the map
-    // var map = L.map('map').setView([51.505, -0.09], 13);
-    var map = L.map('mapid').setView( [ {{ config('leafletsetup.map_center_latitude') }},
-    {{ config('leafletsetup.map_center_longitude') }} ],
-    {{ config('leafletsetup.zoom_level') }} );
+    var map = L.map('mapid').setView( center, {{ config('leafletsetup.zoom_level') }} );
+
+    var marker = L.marker(center).bindPopup('Tugu Digulis').addTo(map);
 
  // Add a tile layer (you can use any tile provider)
-    // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    //     attribution: '© OpenStreetMap contributors'
-    // }).addTo(map);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+var tile = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
     }).addTo(map);
 
