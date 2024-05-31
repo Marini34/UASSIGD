@@ -42,6 +42,16 @@ class DatabaseSeeder extends Seeder
             'image' => 'tugu digulis.jpg'
 
         ]);
+
+        \App\Models\Place::create([
+            'name' => 'Tugu Khatulistiwa',
+            'latitude' => '0.0055731837258', 
+            'longitude' => '109.30454925004',
+            'address' => 'Jl. Khatulistiwa No.Kel, Batu Layang, Kec. Pontianak Utara, Kota Pontianak, Kalimantan Barat 78244',
+            'description' => 'Tugu Khatulistiwa adalah Salah Satu Landwark Kota Pontianak',
+            'image' => 'tugu khatulistiwa.jpg'
+
+        ]);
         
         \App\Models\User::create([
             'name' => 'Budi Utomo',

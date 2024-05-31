@@ -10,9 +10,10 @@
                         <tbody>
                             <tr><td>Nama Tempat</td><td>{{ $place->name }}</td></tr>
                             <tr><td>Alamat</td><td>{{ $place->address }}</td></tr>
-                            <tr><td>Alamat</td><td>{{ $place->description }}</td></tr>
+                            <tr><td>Deskripsi</td><td>{{ $place->description }}</td></tr>                                                    <tr><img src="{{ $place->getImageAsset() }}" alt="{{ $place->getImageAsset() }}"
+                                class="object-fit-contain"></tr>
                         </tbody>
-                        <td><a href="{{ route('frontpage') }}" class="btn btn-secondary">Kembali</a></td>
+                        <td><a href="{{ route('places.index') }}" class="btn btn-secondary">Kembali</a></td>
                     </table>
                 </div>
             </div>

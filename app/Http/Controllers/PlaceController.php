@@ -40,9 +40,8 @@ class PlaceController extends Controller
         $place = new Place;
         if ($request->hasFile('image')){
             $file = $request->file('image');
-            $uploadFile = $file->hashName();
-            $file->move('upload/place/', $uploadFile);
-            $place->image = $uploadFile;
+            $file->move('upload/place/', $file);
+            $place->image = $file;
         }
 
         $place->name = $request->input('name');
@@ -96,9 +95,8 @@ class PlaceController extends Controller
             }
 
             $file = $request->file('image');
-            $uploadFile = $file->hashName();
-            $file->move('upload/place/', $uploadFile);
-            $place->image = $uploadFile;
+            $file->move('upload/place/', $file);
+            $place->image = $file;
 
             $place->update([
             'image' => $request->image,
